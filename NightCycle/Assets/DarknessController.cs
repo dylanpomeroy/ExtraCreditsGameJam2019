@@ -5,26 +5,27 @@ using UnityEngine.UI;
 
 public class DarknessController : MonoBehaviour
 {
-    private RawImage image;
+    private RawImage darkness;
+
+    private bool shouldBeDark;
+
+    public float darkAlpha;
+    public float lightAlpha;
 
     public void MakeDark()
     {
-        var color = image.color;
-        color.a = 0.7f;
-        image.color = color;
+        shouldBeDark = true;
     }
 
     public void MakeLight()
     {
-        var color = image.color;
-        color.a = 0.0f;
-        image.color = color;
+        shouldBeDark = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        image = GetComponent<RawImage>();
+        darkness = GetComponent<RawImage>();
     }
 
     // Update is called once per frame
@@ -34,5 +35,18 @@ public class DarknessController : MonoBehaviour
             MakeDark();
         if (Input.GetKeyDown(KeyCode.M))
             MakeLight();
+
+        if (shouldBeDark && darkness.color.a < darkAlpha)
+        {
+            var tempColor = darkness.color;
+            tempColor.a = darkAlpha;
+            darkness.color = Color32.Lerp(darkness.color, tempColor, Time.deltaTime);
+        }
+        else if (!shouldBeDark && darkness.color.a > lightAlpha)
+        {
+            var tempColor = darkness.color;
+            tempColor.a = lightAlpha;
+            darkness.color = Color32.Lerp(darkness.color, tempColor, Time.deltaTime);
+        }
     }
 }
