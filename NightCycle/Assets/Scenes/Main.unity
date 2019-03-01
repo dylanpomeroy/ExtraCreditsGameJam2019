@@ -13334,6 +13334,7 @@ MonoBehaviour:
   BulletPrefab: {fileID: 7164883310199094555, guid: 4d5843fde9db27e47addda8b5927d549,
     type: 3}
   BulletParent: {fileID: 966852908}
+  BulletPoolSize: 10
 --- !u!1 &1105552610
 GameObject:
   m_ObjectHideFlags: 0
