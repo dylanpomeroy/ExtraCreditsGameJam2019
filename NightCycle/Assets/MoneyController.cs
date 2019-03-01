@@ -15,11 +15,9 @@ public class MoneyController : MonoBehaviour
 
     public void SubtractMoney(int amount)
     {
-        MoneyBalance -= amount;
-        this.UpdateMoneyBalanceText();
+        this.AddMoney(-amount);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Y))

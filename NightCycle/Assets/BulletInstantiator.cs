@@ -8,6 +8,7 @@ public class BulletInstantiator : MonoBehaviour
     public GameObject BulletPrefab;
     public Transform BulletParent;
     public Transform InstantiationPoint;
+    public AmmoController AmmoController;
 
     public enum GunType
     {
@@ -106,6 +107,11 @@ public class BulletInstantiator : MonoBehaviour
 
     private void ShootPistol()
     {
+        if (AmmoController.AmmoBalance < 1)
+        {
+            return;
+        }
+
         GameObject newBullet;
         if (BulletPool.Count == 0)
         {
@@ -122,11 +128,19 @@ public class BulletInstantiator : MonoBehaviour
         newBullet.transform.position = new Vector3(newBullet.transform.position.x, newBullet.transform.position.y, 0);
 
         ActiveBullets.Enqueue(newBullet);
+        AmmoController.SutractAmmo(1);
     }
 
     private void ShootShotgun()
     {
-        for (var i = 0; i < 5; i++)
+        var bulletsInShot = 5;
+
+        if (AmmoController.AmmoBalance < bulletsInShot)
+        {
+            return;
+        }
+
+        for (var i = 0; i < bulletsInShot; i++)
         {
             GameObject newBullet;
             if (BulletPool.Count == 0)
@@ -146,10 +160,17 @@ public class BulletInstantiator : MonoBehaviour
 
             ActiveBullets.Enqueue(newBullet);
         }
+
+        AmmoController.SutractAmmo(bulletsInShot);
     }
 
     private void ShootMachineGun()
     {
+        if (AmmoController.AmmoBalance < 1)
+        {
+            return;
+        }
+
         GameObject newBullet;
         if (BulletPool.Count == 0)
         {
@@ -167,5 +188,6 @@ public class BulletInstantiator : MonoBehaviour
         newBullet.transform.position = new Vector3(newBullet.transform.position.x, newBullet.transform.position.y, 0);
 
         ActiveBullets.Enqueue(newBullet);
+        AmmoController.SutractAmmo(1);
     }
 }
