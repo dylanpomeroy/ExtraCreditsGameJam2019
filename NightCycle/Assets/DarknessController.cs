@@ -12,30 +12,18 @@ public class DarknessController : MonoBehaviour
     public float lightAlpha;
 
     private List<SpriteRenderer> groundRenders;
-
-    public void MakeDark()
-    {
-        shouldBeDark = true;
-    }
-
-    public void MakeLight()
-    {
-        shouldBeDark = false;
-    }
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         groundRenders = GetComponentsInChildren<SpriteRenderer>().Where(render => render.name.Contains("Dirt")).ToList();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.N))
-            MakeDark();
+            shouldBeDark = true;
         if (Input.GetKeyDown(KeyCode.M))
-            MakeLight();
+            shouldBeDark = false;
 
         var darkness = groundRenders[1];
         if (shouldBeDark && darkness.color.a > darkAlpha)
