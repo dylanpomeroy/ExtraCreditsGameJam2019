@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -140,7 +141,7 @@ public class BulletInstantiator : MonoBehaviour
             newBullet.SetActive(true);
             newBullet.transform.position = InstantiationPoint.position;
             newBullet.transform.rotation = InstantiationPoint.rotation;
-            newBullet.transform.Rotate(new Vector3(0, 0, Random.Range(-10f, 10f)));
+            newBullet.transform.Rotate(new Vector3(0, 0, UnityEngine.Random.Range(-10f, 10f)));
             newBullet.transform.position = new Vector3(newBullet.transform.position.x, newBullet.transform.position.y, 0);
 
             ActiveBullets.Enqueue(newBullet);
@@ -162,7 +163,7 @@ public class BulletInstantiator : MonoBehaviour
         newBullet.SetActive(true);
         newBullet.transform.position = InstantiationPoint.position;
         newBullet.transform.rotation = InstantiationPoint.rotation;
-        newBullet.transform.Rotate(new Vector3(0, 0, Random.Range(-5f, 5f)));
+        newBullet.transform.Rotate(new Vector3(0, 0, UnityEngine.Random.Range(-5f, 5f)));
         newBullet.transform.position = new Vector3(newBullet.transform.position.x, newBullet.transform.position.y, 0);
 
         ActiveBullets.Enqueue(newBullet);
