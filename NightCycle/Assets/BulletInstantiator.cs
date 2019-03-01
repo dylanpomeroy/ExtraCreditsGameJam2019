@@ -9,8 +9,14 @@ public class BulletInstantiator : MonoBehaviour
 
     public int BulletPoolSize;
 
-    private Queue<GameObject> BulletPool;
-    private Queue<GameObject> ActiveBullets;
+    private static Queue<GameObject> BulletPool;
+    private static Queue<GameObject> ActiveBullets;
+
+    public static void DestroyBullet(GameObject bullet)
+    {
+        bullet.SetActive(false);
+        BulletPool.Enqueue(bullet);
+    }
 
     private void Start()
     {
@@ -19,7 +25,7 @@ public class BulletInstantiator : MonoBehaviour
 
         for (var i = 0; i < BulletPoolSize; i++)
         {
-            var newBullet = Instantiate(BulletPrefab);
+            var newBullet = Instantiate(BulletPrefab, BulletParent);
             BulletPool.Enqueue(newBullet);
         }
     }
@@ -47,7 +53,18 @@ public class BulletInstantiator : MonoBehaviour
         newBullet.SetActive(true);
         newBullet.transform.position = transform.position;
         newBullet.transform.rotation = transform.rotation;
+        newBullet.transform.position = new Vector3(newBullet.transform.position.x, newBullet.transform.position.y, 0);
 
         ActiveBullets.Enqueue(newBullet);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Enemy ran OnCollisionEnter");
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Enemy ran OnTriggerEnter");
     }
 }
