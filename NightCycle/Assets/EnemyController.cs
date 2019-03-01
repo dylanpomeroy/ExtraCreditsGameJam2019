@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public float Speed;
-
     public int health;
 
     public GameObject Player;
@@ -25,7 +24,7 @@ public class EnemyController : MonoBehaviour
 
             health--;
             if (health <= 0)
-                Destroy(this.gameObject);
+                EnemyInstantiator.DestroyEnemy(this.gameObject);
         }
     }
 }
