@@ -3555,6 +3555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  DisableMovement: 0
 --- !u!4 &336141219
 Transform:
   m_ObjectHideFlags: 0
@@ -4200,7 +4201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -97.59961, y: -58.899902}
+  m_AnchoredPosition: {x: -97.5, y: -59}
   m_SizeDelta: {x: 195.2, y: 117.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &371841140
@@ -4277,6 +4278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoneyController: {fileID: 424304284}
   AmmoController: {fileID: 1237609651}
+  BulletInstantiator: {fileID: 966852909}
   PistolPurchasePrice: 100
   ShotgunPurchasePrice: 200
   MachineGunPurchasePrice: 300
@@ -9263,6 +9265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletInstantiator: {fileID: 966852909}
+  PlayerController: {fileID: 336141218}
 --- !u!1 &670599438
 GameObject:
   m_ObjectHideFlags: 0
@@ -13472,6 +13475,7 @@ MonoBehaviour:
   AmmoController: {fileID: 1237609651}
   WeaponsController: {fileID: 371841143}
   DisableFiring: 0
+  GunSelected: 0
   BulletPoolSize: 200
 --- !u!1 &969614954
 GameObject:
@@ -24593,6 +24597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MarketMenu: {fileID: 664628241}
   BulletInstantiator: {fileID: 966852909}
+  PlayerController: {fileID: 336141218}
 --- !u!1 &1726071005
 GameObject:
   m_ObjectHideFlags: 0

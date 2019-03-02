@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PurchaseShotgun : MonoBehaviour
 {
     public MoneyController MoneyController;
-    public WeaponsController WeaponsController;
+    public WeaponsShopController WeaponsController;
 
     public void Pressed()
     {

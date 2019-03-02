@@ -9,7 +9,7 @@ public class BulletInstantiator : MonoBehaviour
     public Transform BulletParent;
     public Transform InstantiationPoint;
     public AmmoController AmmoController;
-    public WeaponsController WeaponsController;
+    public WeaponsShopController WeaponsController;
 
     public bool DisableFiring;
 
@@ -20,7 +20,7 @@ public class BulletInstantiator : MonoBehaviour
         MachineGun
     }
 
-    private GunType gunSelected;
+    public GunType GunSelected;
     private Dictionary<GunType, float> secondsAllowedBetweenBullets = new Dictionary<GunType, float>
     {
         { GunType.Pistol, 0.3f },
@@ -71,20 +71,20 @@ public class BulletInstantiator : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1) && WeaponsController.PistolPurchased)
         {
-            gunSelected = GunType.Pistol;
+            GunSelected = GunType.Pistol;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && WeaponsController.ShotgunPurchased)
         {
-            gunSelected = GunType.Shotgun;
+            GunSelected = GunType.Shotgun;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) && WeaponsController.MachinegunPurchased)
         {
-            gunSelected = GunType.MachineGun;
+            GunSelected = GunType.MachineGun;
         }
 
         if (Input.GetMouseButton(0))
         {
-            TryShoot(gunSelected);
+            TryShoot(GunSelected);
         }
     }
 
