@@ -11,8 +11,21 @@ public class DarknessController : MonoBehaviour
     public float darkAlpha;
     public float lightAlpha;
 
+    public bool IsDark;
+    public bool IsLight;
+
     private List<SpriteRenderer> groundRenders;
     
+    public void MakeDark()
+    {
+        shouldBeDark = true;
+    }
+
+    public void MakeLight()
+    {
+        shouldBeDark = false;
+    }
+
     void Start()
     {
         groundRenders = GetComponentsInChildren<SpriteRenderer>().Where(render => render.name.Contains("Dirt")).ToList();
@@ -38,6 +51,9 @@ public class DarknessController : MonoBehaviour
             tempColor.a = lightAlpha;
             darkness.color = Color32.Lerp(darkness.color, tempColor, Time.deltaTime);
         }
+
+        IsDark = darkness.color.a < darkAlpha + 0.3f;
+        IsLight = darkness.color.a > lightAlpha - 0.3f;
 
         groundRenders.ForEach(render => render.color = darkness.color);
     }

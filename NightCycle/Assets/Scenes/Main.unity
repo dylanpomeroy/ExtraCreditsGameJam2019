@@ -5930,6 +5930,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   darkAlpha: 0.4
   lightAlpha: 1
+  IsDark: 0
+  IsLight: 0
 --- !u!1 &506229720
 GameObject:
   m_ObjectHideFlags: 0
@@ -16453,6 +16455,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoinInstantiator: {fileID: 278388112}
+  EnemyInstantiator: {fileID: 1527484988}
+  DarknessController: {fileID: 504889232}
   MarketMenu: {fileID: 664628241}
 --- !u!4 &1133561162
 Transform:

@@ -18,11 +18,14 @@ public class EnemyInstantiator : MonoBehaviour
 
     private static Queue<GameObject> EnemyPool;
     private static Queue<GameObject> ActiveEnemies;
+    public static int ActuallyActiveEnemyCount;
 
     public static void DestroyEnemy(GameObject enemy)
     {
         enemy.SetActive(false);
         EnemyPool.Enqueue(enemy);
+
+        ActuallyActiveEnemyCount--;
     }
 
     void Start()
@@ -70,6 +73,7 @@ public class EnemyInstantiator : MonoBehaviour
             else
             {
                 newEnemy = EnemyPool.Dequeue();
+                ActuallyActiveEnemyCount++;
             }
 
             newEnemy.SetActive(true);

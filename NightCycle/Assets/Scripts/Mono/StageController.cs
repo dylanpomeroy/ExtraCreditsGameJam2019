@@ -7,6 +7,8 @@ using UnityEngine;
 public class StageController : MonoBehaviour
 {
     public CoinInstantiator CoinInstantiator;
+    public EnemyInstantiator EnemyInstantiator;
+    public DarknessController DarknessController;
     public GameObject MarketMenu;
 
     private List<Stage> stages;
@@ -16,7 +18,7 @@ public class StageController : MonoBehaviour
     {
         stages = new List<Stage>();
 
-        var newStage = new Stage(
+        var startingStage = new Stage(
             0,
             new List<StageStep>
             {
@@ -32,9 +34,40 @@ public class StageController : MonoBehaviour
                         }
                     },
                     checkCompleted: () => CoinInstantiator.ActuallyActiveCoinCount == 0),
+                new StageStep(
+                    stepAction: () => MarketMenu.SetActive(true),
+                    checkCompleted: () => !MarketMenu.activeSelf),
             });
 
-        stages.Add(newStage);
+        var stage1 = new Stage(
+            1,
+            new List<StageStep>
+            {
+                new StageStep(
+                    stepAction: () => DarknessController.MakeDark(),
+                    checkCompleted: () => DarknessController.IsDark),
+                new StageStep(
+                    stepAction: () =>
+                    {
+                        EnemyInstantiator.SpawnEnemies(10);
+                    },
+                    checkCompleted: () => EnemyInstantiator.ActuallyActiveEnemyCount == 0),
+                new StageStep(
+                    stepAction: () => DarknessController.MakeLight(),
+                    checkCompleted: () => DarknessController.IsLight),
+                new StageStep(
+                    stepAction: () =>
+                    {
+
+                    },
+                    checkCompleted: () => CoinInstantiator.ActuallyActiveCoinCount == 0),
+                new StageStep(
+                    stepAction: () => MarketMenu.SetActive(true),
+                    checkCompleted: () => !MarketMenu.activeSelf),
+            });
+
+        stages.Add(startingStage);
+        stages.Add(stage1);
     }
 
     private void Update()
