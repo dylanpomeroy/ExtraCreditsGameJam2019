@@ -61,6 +61,11 @@ public class EnemyInstantiator : MonoBehaviour
             if (EnemyPool.Count == 0)
             {
                 newEnemy = ActiveEnemies.Dequeue();
+                
+                // inactive enemies are ones we put back in the enemy pool
+                // these are leftover entries we should ignore
+                while (!newEnemy.activeSelf)
+                    newEnemy = ActiveEnemies.Dequeue();
             }
             else
             {

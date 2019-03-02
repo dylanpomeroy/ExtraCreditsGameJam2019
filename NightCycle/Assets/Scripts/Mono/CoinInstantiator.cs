@@ -11,11 +11,27 @@ public class CoinInstantiator : MonoBehaviour
 
     public static Queue<GameObject> CoinPool;
     public static Queue<GameObject> ActiveCoins;
+    public static int ActuallyActiveCoinCount
+    {
+        get
+        {
+            return actuallyActiveCoinCount;
+        }
+        set
+        {
+            //Debug.Log($"{nameof(ActuallyActiveCoinCount)} being set to: {value}");
+            actuallyActiveCoinCount = value;
+        }
+    }
+
+    private static int actuallyActiveCoinCount;
 
     public static void DestroyCoin(GameObject coin)
     {
         coin.SetActive(false);
         CoinPool.Enqueue(coin);
+
+        ActuallyActiveCoinCount--;
     }
 
     public void InstantiateCoin(Vector2 position)
@@ -24,10 +40,16 @@ public class CoinInstantiator : MonoBehaviour
         if (CoinPool.Count == 0)
         {
             newCoin = ActiveCoins.Dequeue();
+
+            // inactive coints are ones we put back in the coin pool
+            // these are leftover entries we should ignore
+            while (!newCoin.activeSelf)
+                newCoin = ActiveCoins.Dequeue();
         }
         else
         {
             newCoin = CoinPool.Dequeue();
+            ActuallyActiveCoinCount++;
         }
 
         newCoin.SetActive(true);
