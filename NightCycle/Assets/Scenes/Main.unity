@@ -1861,6 +1861,7 @@ GameObject:
   - component: {fileID: 162406625}
   - component: {fileID: 162406624}
   - component: {fileID: 162406623}
+  - component: {fileID: 162406627}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1950,6 +1951,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &162406627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162406622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a2d977bfe11614d96f908dd7644c3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarketMenu: {fileID: 664628241}
 --- !u!1 &169888483
 GameObject:
   m_ObjectHideFlags: 0
@@ -2347,6 +2361,7 @@ GameObject:
   - component: {fileID: 235555654}
   - component: {fileID: 235555653}
   - component: {fileID: 235555652}
+  - component: {fileID: 235555655}
   m_Layer: 5
   m_Name: PurchaseButton
   m_TagString: Untagged
@@ -2413,7 +2428,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 235555653}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 235555655}
+        m_MethodName: Pressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &235555653
@@ -2453,6 +2479,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 235555650}
   m_CullTransparentMesh: 0
+--- !u!114 &235555655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235555650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f113ea33238ae40a2137be54f2f316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoneyController: {fileID: 424304284}
+  WeaponsController: {fileID: 371841143}
 --- !u!1 &238767369
 GameObject:
   m_ObjectHideFlags: 0
@@ -2977,6 +3017,7 @@ GameObject:
   - component: {fileID: 291083924}
   - component: {fileID: 291083923}
   - component: {fileID: 291083922}
+  - component: {fileID: 291083925}
   m_Layer: 5
   m_Name: PurchaseButton
   m_TagString: Untagged
@@ -3043,7 +3084,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 291083923}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 291083925}
+        m_MethodName: Pressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &291083923
@@ -3083,6 +3135,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 291083920}
   m_CullTransparentMesh: 0
+--- !u!114 &291083925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291083920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a406246a0be90469f3fcb105e7d9c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoneyController: {fileID: 424304284}
+  WeaponsController: {fileID: 371841143}
 --- !u!1 &294338021
 GameObject:
   m_ObjectHideFlags: 0
@@ -4109,6 +4175,7 @@ GameObject:
   - component: {fileID: 371841142}
   - component: {fileID: 371841141}
   - component: {fileID: 371841140}
+  - component: {fileID: 371841143}
   m_Layer: 5
   m_Name: WeaponsPanel
   m_TagString: Untagged
@@ -4133,7 +4200,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -97.6, y: -58.9}
+  m_AnchoredPosition: {x: -97.59961, y: -58.899902}
   m_SizeDelta: {x: 195.2, y: 117.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &371841140
@@ -4196,6 +4263,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 371841138}
   m_CullTransparentMesh: 0
+--- !u!114 &371841143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371841138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e30814517c1e8ad489e6cc7ef70016ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoneyController: {fileID: 424304284}
+  AmmoController: {fileID: 1237609651}
+  PistolPurchasePrice: 100
+  ShotgunPurchasePrice: 200
+  MachineGunPurchasePrice: 300
+  AmmoAmountPerPurchase: 100
+  AmmoPurchasePrice: 10
+  PistolPurchased: 1
+  ShotgunPurchased: 0
+  MachinegunPurchased: 0
 --- !u!1 &374040799
 GameObject:
   m_ObjectHideFlags: 0
@@ -6908,6 +6997,7 @@ GameObject:
   - component: {fileID: 556748303}
   - component: {fileID: 556748302}
   - component: {fileID: 556748301}
+  - component: {fileID: 556748304}
   m_Layer: 5
   m_Name: PurchaseButton
   m_TagString: Untagged
@@ -6974,7 +7064,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 556748302}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 556748304}
+        m_MethodName: Pressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &556748302
@@ -7014,6 +7115,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556748299}
   m_CullTransparentMesh: 0
+--- !u!114 &556748304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556748299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7d490dee75f2cf4e873d3829173fe6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoneyController: {fileID: 424304284}
+  WeaponsController: {fileID: 371841143}
 --- !u!1 &557927171
 GameObject:
   m_ObjectHideFlags: 0
@@ -9032,6 +9147,8 @@ GameObject:
   - component: {fileID: 664628245}
   - component: {fileID: 664628244}
   - component: {fileID: 664628243}
+  - component: {fileID: 664628246}
+  - component: {fileID: 664628247}
   m_Layer: 5
   m_Name: MarketMenu
   m_TagString: Untagged
@@ -9121,6 +9238,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 664628241}
   m_CullTransparentMesh: 0
+--- !u!114 &664628246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664628241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3867476af5c5bc4caba480bb3d3323e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &664628247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664628241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebfb674ba4a395b46a31ca043a0428ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletInstantiator: {fileID: 966852909}
 --- !u!1 &670599438
 GameObject:
   m_ObjectHideFlags: 0
@@ -13327,6 +13469,9 @@ MonoBehaviour:
     type: 3}
   BulletParent: {fileID: 1383543213}
   InstantiationPoint: {fileID: 1096308887}
+  AmmoController: {fileID: 1237609651}
+  WeaponsController: {fileID: 371841143}
+  DisableFiring: 0
   BulletPoolSize: 200
 --- !u!1 &969614954
 GameObject:
@@ -17951,6 +18096,7 @@ GameObject:
   - component: {fileID: 1237609648}
   - component: {fileID: 1237609650}
   - component: {fileID: 1237609649}
+  - component: {fileID: 1237609651}
   m_Layer: 5
   m_Name: AmmoText
   m_TagString: Untagged
@@ -18019,6 +18165,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237609647}
   m_CullTransparentMesh: 0
+--- !u!114 &1237609651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237609647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba6cf83a867a5d246bb584c2bb45a2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1237732794
 GameObject:
   m_ObjectHideFlags: 0
@@ -23047,6 +23205,7 @@ GameObject:
   - component: {fileID: 1630973453}
   - component: {fileID: 1630973452}
   - component: {fileID: 1630973451}
+  - component: {fileID: 1630973454}
   m_Layer: 5
   m_Name: PurchaseAmmo
   m_TagString: Untagged
@@ -23113,7 +23272,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1630973452}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1630973454}
+        m_MethodName: Pressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1630973452
@@ -23153,6 +23323,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1630973449}
   m_CullTransparentMesh: 0
+--- !u!114 &1630973454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630973449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4796ee3c433542b4a87d39bbc4487699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoneyController: {fileID: 424304284}
+  WeaponsController: {fileID: 371841143}
 --- !u!1 &1634164929
 GameObject:
   m_ObjectHideFlags: 0
@@ -24277,6 +24461,7 @@ GameObject:
   - component: {fileID: 1719447822}
   - component: {fileID: 1719447821}
   - component: {fileID: 1719447820}
+  - component: {fileID: 1719447823}
   m_Layer: 5
   m_Name: DoneButton
   m_TagString: Untagged
@@ -24343,7 +24528,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1719447821}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1719447823}
+        m_MethodName: Pressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1719447821
@@ -24383,6 +24579,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719447818}
   m_CullTransparentMesh: 0
+--- !u!114 &1719447823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719447818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29329a7c860aeb14ba3f035b73cc5a87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarketMenu: {fileID: 664628241}
+  BulletInstantiator: {fileID: 966852909}
 --- !u!1 &1726071005
 GameObject:
   m_ObjectHideFlags: 0

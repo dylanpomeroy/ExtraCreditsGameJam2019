@@ -7,6 +7,11 @@ public class MoneyController : MonoBehaviour
 {
     public int MoneyBalance { get; private set; }
 
+    public bool CanAfford(int amount)
+    {
+        return MoneyBalance >= amount;
+    }
+
     public void AddMoney(int amount)
     {
         MoneyBalance += amount;

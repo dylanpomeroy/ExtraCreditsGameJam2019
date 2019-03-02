@@ -9,6 +9,9 @@ public class BulletInstantiator : MonoBehaviour
     public Transform BulletParent;
     public Transform InstantiationPoint;
     public AmmoController AmmoController;
+    public WeaponsController WeaponsController;
+
+    public bool DisableFiring;
 
     public enum GunType
     {
@@ -47,6 +50,7 @@ public class BulletInstantiator : MonoBehaviour
     {
         BulletPool = new Queue<GameObject>();
         ActiveBullets = new Queue<GameObject>();
+        DisableFiring = false;
 
         for (var i = 0; i < BulletPoolSize; i++)
         {
@@ -58,20 +62,22 @@ public class BulletInstantiator : MonoBehaviour
 
     private void Update()
     {
+        if (DisableFiring)
+            return;
 
         timeUntilCanFire[GunType.Pistol] -= Time.deltaTime;
         timeUntilCanFire[GunType.Shotgun] -= Time.deltaTime;
         timeUntilCanFire[GunType.MachineGun] -= Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && WeaponsController.PistolPurchased)
         {
             gunSelected = GunType.Pistol;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && WeaponsController.ShotgunPurchased)
         {
             gunSelected = GunType.Shotgun;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && WeaponsController.MachinegunPurchased)
         {
             gunSelected = GunType.MachineGun;
         }
