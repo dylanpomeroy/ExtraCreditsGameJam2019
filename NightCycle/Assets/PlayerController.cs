@@ -7,13 +7,11 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public bool DisableMovement;
 
-    // Start is called before the first frame update
     void Start()
     {
         if (speed == 0f) speed = 1;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (DisableMovement)

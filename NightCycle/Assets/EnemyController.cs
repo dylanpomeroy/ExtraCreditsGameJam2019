@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     public float Speed;
     public int health;
 
+    public CoinInstantiator CoinInstantiator; 
     public GameObject Player;
 
     void Update()
@@ -18,13 +19,25 @@ public class EnemyController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            transform.position += (transform.position - Player.transform.position).normalized * 10 * Time.deltaTime;
-
-            BulletInstantiator.DestroyBullet(other.gameObject);
-
-            health--;
-            if (health <= 0)
-                EnemyInstantiator.DestroyEnemy(this.gameObject);
+            HandleBulletCollision(other);
         }
+    }
+
+    private void HandleBulletCollision(Collider2D bulletCollider)
+    {
+        transform.position += (transform.position - Player.transform.position).normalized * 10 * Time.deltaTime;
+
+        BulletInstantiator.DestroyBullet(bulletCollider.gameObject);
+
+        health--;
+        if (health <= 0)
+            HandleDeath();
+    }
+
+    private void HandleDeath()
+    {
+        CoinInstantiator.InstantiateCoin(transform.position);
+
+        EnemyInstantiator.DestroyEnemy(this.gameObject);
     }
 }
