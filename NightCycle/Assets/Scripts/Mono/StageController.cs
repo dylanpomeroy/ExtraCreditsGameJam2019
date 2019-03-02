@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StageController : MonoBehaviour
 {
     public CoinInstantiator CoinInstantiator;
     public EnemyInstantiator EnemyInstantiator;
     public DarknessController DarknessController;
+    public Text GoalText;
+    public Text HintText;
     public GameObject MarketMenu;
 
     private List<Stage> stages;
@@ -25,6 +28,8 @@ public class StageController : MonoBehaviour
                 new StageStep(
                     stepAction: () =>
                     {
+                        GoalText.text = "Goal: Pick up all the coins off the ground";
+                        HintText.text = "Hint: You can move with the WASD keys";
                         for (var i = 0; i < 19; i++)
                         {
                             var randomVector = new Vector2(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
@@ -35,7 +40,12 @@ public class StageController : MonoBehaviour
                     },
                     checkCompleted: () => CoinInstantiator.ActuallyActiveCoinCount == 0),
                 new StageStep(
-                    stepAction: () => MarketMenu.SetActive(true),
+                    stepAction: () =>
+                    {
+                        GoalText.text = "Goal: Purchase a handgun and some ammo";
+                        HintText.text = "Hint: Click the purchase buttons and then Done when you're finished";
+                        MarketMenu.SetActive(true);
+                    },
                     checkCompleted: () => !MarketMenu.activeSelf),
             });
 
@@ -49,6 +59,8 @@ public class StageController : MonoBehaviour
                 new StageStep(
                     stepAction: () =>
                     {
+                        GoalText.text = "Goal: Shoot all the enemies before they get to you!";
+                        HintText.text = "Hint: You can aim with the mouse and shoot with left click";
                         EnemyInstantiator.SpawnEnemies(10);
                     },
                     checkCompleted: () => EnemyInstantiator.ActuallyActiveEnemyCount == 0),
@@ -58,11 +70,17 @@ public class StageController : MonoBehaviour
                 new StageStep(
                     stepAction: () =>
                     {
-
+                        GoalText.text = "Goal: Finish collecting all the coins dropped by the enemies";
+                        HintText.text = string.Empty;
                     },
                     checkCompleted: () => CoinInstantiator.ActuallyActiveCoinCount == 0),
                 new StageStep(
-                    stepAction: () => MarketMenu.SetActive(true),
+                    stepAction: () =>
+                    {
+                        GoalText.text = "Goal: Prepare yoursle for the next attack!";
+                        HintText.text = "Hint: Once you earn enough money you can purchase better weapons";
+                        MarketMenu.SetActive(true);
+                    },
                     checkCompleted: () => !MarketMenu.activeSelf),
             });
 
@@ -75,6 +93,7 @@ public class StageController : MonoBehaviour
         if (currentStageIndex == stages.Count)
         {
             Debug.Log("Game Complete!");
+            GoalText.text = "Congratulations, you beat the game!";
             return;
         }
 
