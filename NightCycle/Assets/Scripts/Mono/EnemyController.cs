@@ -23,10 +23,6 @@ public class EnemyController : MonoBehaviour
         {
             HandleBulletCollision(other);
         }
-        else if (other.gameObject.CompareTag("Player"))
-        {
-            PlayerController.TakeDamage(10);
-        }
     }
 
     private void HandleBulletCollision(Collider2D bulletCollider)

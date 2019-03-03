@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public MoneyController MoneyController;
+
     public float speed;
     public bool DisableMovement;
 
@@ -39,8 +41,21 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
             moveVector += Vector2.right;
 
-        moveVector = moveVector.normalized * speed * Time.deltaTime;
+        moveVector = moveVector.normalized * speed * 0.01f;
 
-        transform.position += new Vector3(moveVector.x, moveVector.y);
+        GetComponent<CharacterController>().Move(moveVector);
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+            MoneyController.AddMoney(collision.gameObject.GetComponent<CoinController>().Value);
+            CoinInstantiator.DestroyCoin(collision.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            TakeDamage(10);
+        }
     }
 }
