@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public MoneyController MoneyController;
     public HealthBar HealthBar;
     public GameObject GameOverText;
+    public GameObject RestartButton;
 
     public float speed;
     public bool DisableMovement;
@@ -20,7 +21,15 @@ public class PlayerController : MonoBehaviour
         {
             Time.timeScale = 0.1f;
             GameOverText.SetActive(true);
+            Invoke("ShowRestartButton", 0.5f);
         }
+    }
+
+    private void ShowRestartButton()
+    {
+
+        Time.timeScale = 0f;
+        RestartButton.SetActive(true);
     }
 
     void Start()
