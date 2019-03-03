@@ -10,11 +10,46 @@ public class EnemyController : MonoBehaviour
     public CoinInstantiator CoinInstantiator; 
     public PlayerController PlayerController;
 
+    private Vector2 RandomSpotInUnitCircle;
+
+    public MovementType typeOfMovement;
+
+    public enum MovementType
+    {
+        Direct,
+        Twitch,
+    }
+
     private bool disableCollisionDetection;
+
+    void OnEnable()
+    {
+        disableCollisionDetection = false;
+
+        Debug.Log("Setting destination near player.");
+        RandomSpotInUnitCircle = Random.insideUnitCircle;
+    }
 
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, PlayerController.transform.position, Time.deltaTime * Speed);
+        if (Vector2.Distance(transform.position, PlayerController.transform.position) <= 1)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, PlayerController.transform.position, Time.deltaTime * Speed);
+        }
+        else
+        {
+            switch (typeOfMovement)
+            {
+                case MovementType.Direct:
+                    transform.position = Vector2.MoveTowards(transform.position, (Vector2)PlayerController.transform.position + RandomSpotInUnitCircle, Time.deltaTime * Speed);
+                    break;
+
+                case MovementType.Twitch:
+                    transform.position = Vector2.MoveTowards(transform.position, (Vector2)PlayerController.transform.position + RandomSpotInUnitCircle, Time.deltaTime * Speed)
+                        + new Vector2(Random.Range(-0.01f, 0.01f), Random.Range(-0.01f, 0.01f));
+                    break;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -45,10 +80,5 @@ public class EnemyController : MonoBehaviour
         EnemyInstantiator.DestroyEnemy(this.gameObject);
 
         disableCollisionDetection = true;
-    }
-
-    private void OnEnable()
-    {
-        disableCollisionDetection = false;
     }
 }

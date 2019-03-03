@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
             moveVector += Vector2.right;
 
-        moveVector = moveVector.normalized * speed * 0.01f;
+        moveVector = moveVector.normalized * speed * Time.deltaTime;
 
         GetComponent<CharacterController>().Move(moveVector);
     }
@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
+            GetComponent<CharacterController>().Move((transform.position - collision.transform.position).normalized * Time.deltaTime * 10);
             TakeDamage(10);
         }
     }

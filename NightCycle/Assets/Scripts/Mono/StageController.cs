@@ -65,7 +65,7 @@ public class StageController : MonoBehaviour
                     stepAction: () =>
                     {
                         SetTexts(null,
-                            "Prepare yourself for the text attack!");
+                            "Prepare yourself for the next attack!");
 
                         MarketMenu.SetActive(true);
                     },
@@ -140,7 +140,7 @@ public class StageController : MonoBehaviour
                     stepAction: () =>
                     {
                         SetTexts(null,
-                            "Prepare yourself for the text attack!",
+                            "Prepare yourself for the next attack!",
                             "Once you earn enough money you can purchase better weapons");
 
                         MarketMenu.SetActive(true);

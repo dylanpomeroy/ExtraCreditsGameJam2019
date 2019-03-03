@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static EnemyController;
 
 public class EnemyInstantiator : MonoBehaviour
 {
@@ -42,7 +43,6 @@ public class EnemyInstantiator : MonoBehaviour
             var enemyScript = newEnemy.GetComponent<EnemyController>();
             enemyScript.PlayerController = PlayerController;
             enemyScript.CoinInstantiator = CoinInstantiator;
-            enemyScript.health = 3;
 
             newEnemy.SetActive(false);
             EnemyPool.Enqueue(newEnemy);
@@ -82,6 +82,10 @@ public class EnemyInstantiator : MonoBehaviour
             newEnemy.transform.position = (Vector2)newEnemy.transform.position + new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
 
             newEnemy.transform.position = new Vector3(newEnemy.transform.position.x, newEnemy.transform.position.y, 0);
+
+            var enemyScript = newEnemy.GetComponent<EnemyController>();
+            enemyScript.health = 3;
+            enemyScript.typeOfMovement = (MovementType)Random.Range(0, 2);
 
             ActiveEnemies.Enqueue(newEnemy);
         }
