@@ -12,6 +12,11 @@ public class BulletInstantiator : MonoBehaviour
     public WeaponsShopController WeaponsController;
     public GunSpriteController GunSpriteController;
 
+    public AudioClip PistolShoot;
+    public AudioClip ShotgunShoot;
+    public AudioClip MachinegunShoot;
+    public AudioClip EmptyClip;
+
     public bool DisableFiring;
 
     public enum GunType
@@ -119,6 +124,7 @@ public class BulletInstantiator : MonoBehaviour
     {
         if (AmmoController.AmmoBalance < 1)
         {
+            GetComponent<AudioSource>().PlayOneShot(EmptyClip);
             return;
         }
 
@@ -139,6 +145,8 @@ public class BulletInstantiator : MonoBehaviour
 
         ActiveBullets.Enqueue(newBullet);
         AmmoController.SutractAmmo(1);
+
+        GetComponent<AudioSource>().PlayOneShot(PistolShoot);
     }
 
     private void ShootShotgun()
@@ -147,6 +155,7 @@ public class BulletInstantiator : MonoBehaviour
 
         if (AmmoController.AmmoBalance < bulletsInShot)
         {
+            GetComponent<AudioSource>().PlayOneShot(EmptyClip);
             return;
         }
 
@@ -174,6 +183,8 @@ public class BulletInstantiator : MonoBehaviour
             newBullet.transform.position = new Vector3(newBullet.transform.position.x, newBullet.transform.position.y, 0);
 
             ActiveBullets.Enqueue(newBullet);
+
+            GetComponent<AudioSource>().PlayOneShot(ShotgunShoot);
         }
 
         AmmoController.SutractAmmo(bulletsInShot);
@@ -183,6 +194,7 @@ public class BulletInstantiator : MonoBehaviour
     {
         if (AmmoController.AmmoBalance < 1)
         {
+            GetComponent<AudioSource>().PlayOneShot(EmptyClip);
             return;
         }
 
@@ -204,5 +216,7 @@ public class BulletInstantiator : MonoBehaviour
 
         ActiveBullets.Enqueue(newBullet);
         AmmoController.SutractAmmo(1);
+
+        GetComponent<AudioSource>().PlayOneShot(PistolShoot);
     }
 }
