@@ -26,6 +26,7 @@ public class StageController : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Starting stage controller.");
         stages = new List<Stage>();
 
         CoinInstantiator.ActuallyActiveCoinCount = 0;

@@ -34,7 +34,7 @@ public class DarknessController : MonoBehaviour
     {
         Texts.ForEach(text => text.faceColor = Color.black);
 
-        groundRenders = GetComponentsInChildren<SpriteRenderer>().Where(render => render.name.Contains("Dirt")).ToList();
+        groundRenders = GetComponentsInChildren<SpriteRenderer>().ToList();
     }
 
     void Update()
@@ -49,7 +49,7 @@ public class DarknessController : MonoBehaviour
         {
             var tempColor = darkness.color;
             tempColor.a = darkAlpha;
-            darkness.color = Color32.Lerp(darkness.color, tempColor, Time.deltaTime);
+            darkness.color = Color32.Lerp(darkness.color, tempColor, Time.deltaTime * 5);
             Texts.ForEach(text => text.faceColor = Color32.Lerp(text.faceColor, Color.white, Time.deltaTime * 5));
             Underground.color = Color32.Lerp(Underground.color, Color.black, Time.deltaTime * 5);
         }
@@ -57,7 +57,7 @@ public class DarknessController : MonoBehaviour
         {
             var tempColor = darkness.color;
             tempColor.a = lightAlpha;
-            darkness.color = Color32.Lerp(darkness.color, tempColor, Time.deltaTime);
+            darkness.color = Color32.Lerp(darkness.color, tempColor, Time.deltaTime * 5);
             Texts.ForEach(text => text.faceColor = Color32.Lerp(text.faceColor, Color.black, Time.deltaTime * 5));
             Underground.color = Color32.Lerp(Underground.color, new Color32(152, 114, 78, 255), Time.deltaTime * 5);
         }

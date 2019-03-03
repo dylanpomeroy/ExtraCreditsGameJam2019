@@ -82,7 +82,7 @@ public class EnemyInstantiator : MonoBehaviour
             newEnemy.transform.position = InstantiationPoints.GetRandom().position;
             newEnemy.transform.position = (Vector2)newEnemy.transform.position + new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
 
-            newEnemy.transform.position = new Vector3(newEnemy.transform.position.x, newEnemy.transform.position.y, 0);
+            newEnemy.transform.position = new Vector3(newEnemy.transform.position.x, newEnemy.transform.position.y, 7);
 
             var enemyScript = newEnemy.GetComponent<EnemyController>();
             enemyScript.Health = 2;

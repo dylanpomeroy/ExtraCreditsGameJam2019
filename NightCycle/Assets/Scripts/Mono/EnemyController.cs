@@ -73,6 +73,8 @@ public class EnemyController : MonoBehaviour
         }
 
         transform.position = newPosition;
+
+        transform.position = new Vector3(transform.position.x, transform.position.y, 7);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

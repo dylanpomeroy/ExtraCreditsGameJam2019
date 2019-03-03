@@ -53,6 +53,7 @@ namespace Assets.Scripts
             var currentStep = steps[currentStepIndex];
             if (!currentStep.IsStarted)
             {
+                //Debug.Log($"Stage {StageIndex} starting step {currentStepIndex}");
                 currentStep.Start();
             }
             else if (currentStep.IsInProgress)

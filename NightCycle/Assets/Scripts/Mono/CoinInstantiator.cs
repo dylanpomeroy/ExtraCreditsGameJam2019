@@ -54,7 +54,7 @@ public class CoinInstantiator : MonoBehaviour
 
         newCoin.SetActive(true);
         newCoin.transform.position = position;
-        newCoin.transform.position = new Vector3(newCoin.transform.position.x, newCoin.transform.position.y, 0);
+        newCoin.transform.position = new Vector3(newCoin.transform.position.x, newCoin.transform.position.y, 7);
 
         ActiveCoins.Enqueue(newCoin);
     }
