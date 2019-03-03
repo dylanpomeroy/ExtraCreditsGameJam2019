@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public float Speed;
-    public int health;
+    public int Health;
 
     public CoinInstantiator CoinInstantiator; 
     public PlayerController PlayerController;
@@ -67,8 +67,8 @@ public class EnemyController : MonoBehaviour
 
         BulletInstantiator.DestroyBullet(bulletCollider.gameObject);
 
-        health--;
-        if (health <= 0)
+        Health--;
+        if (Health <= 0)
             HandleDeath();
     }
 

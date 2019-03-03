@@ -16,6 +16,7 @@ public class DarknessController : MonoBehaviour
     public bool IsLight;
 
     public List<TextMeshProUGUI> Texts;
+    public SpriteRenderer Underground;
 
     private List<SpriteRenderer> groundRenders;
     
@@ -50,6 +51,7 @@ public class DarknessController : MonoBehaviour
             tempColor.a = darkAlpha;
             darkness.color = Color32.Lerp(darkness.color, tempColor, Time.deltaTime);
             Texts.ForEach(text => text.faceColor = Color32.Lerp(text.faceColor, Color.white, Time.deltaTime * 5));
+            Underground.color = Color32.Lerp(Underground.color, Color.black, Time.deltaTime * 5);
         }
         else if (!shouldBeDark && darkness.color.a < lightAlpha)
         {
@@ -57,6 +59,7 @@ public class DarknessController : MonoBehaviour
             tempColor.a = lightAlpha;
             darkness.color = Color32.Lerp(darkness.color, tempColor, Time.deltaTime);
             Texts.ForEach(text => text.faceColor = Color32.Lerp(text.faceColor, Color.black, Time.deltaTime * 5));
+            Underground.color = Color32.Lerp(Underground.color, new Color32(152, 114, 78, 255), Time.deltaTime * 5);
         }
 
         IsDark = darkness.color.a < darkAlpha + 0.3f;

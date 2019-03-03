@@ -84,7 +84,7 @@ public class EnemyInstantiator : MonoBehaviour
             newEnemy.transform.position = new Vector3(newEnemy.transform.position.x, newEnemy.transform.position.y, 0);
 
             var enemyScript = newEnemy.GetComponent<EnemyController>();
-            enemyScript.health = 3;
+            enemyScript.Health = 2;
             enemyScript.typeOfMovement = (MovementType)Random.Range(0, 2);
 
             ActiveEnemies.Enqueue(newEnemy);
