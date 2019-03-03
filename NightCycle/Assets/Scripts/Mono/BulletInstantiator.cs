@@ -10,6 +10,7 @@ public class BulletInstantiator : MonoBehaviour
     public Transform InstantiationPoint;
     public AmmoController AmmoController;
     public WeaponsShopController WeaponsController;
+    public GunSpriteController GunSpriteController;
 
     public bool DisableFiring;
 
@@ -72,14 +73,17 @@ public class BulletInstantiator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1) && WeaponsController.PistolPurchased)
         {
             GunSelected = GunType.Pistol;
+            GunSpriteController.EquipPistol();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && WeaponsController.ShotgunPurchased)
         {
             GunSelected = GunType.Shotgun;
+            GunSpriteController.EquipShotgun();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) && WeaponsController.MachinegunPurchased)
         {
             GunSelected = GunType.MachineGun;
+            GunSpriteController.EquipMachinegun();
         }
 
         if (Input.GetMouseButton(0))

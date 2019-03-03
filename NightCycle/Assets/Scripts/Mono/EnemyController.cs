@@ -27,28 +27,48 @@ public class EnemyController : MonoBehaviour
         disableCollisionDetection = false;
 
         RandomSpotInUnitCircle = Random.insideUnitCircle;
+
+        Invoke($"{nameof(FlipSpriteTowardsPlayer)}", 0.5f);
+    }
+
+    private void FlipSpriteTowardsPlayer()
+    {
+        var currentPosition = transform.position;
+        var playerPosition = PlayerController.transform.position;
+
+        GetComponent<SpriteRenderer>().flipX = currentPosition.x > playerPosition.x;
+
+        Invoke($"{nameof(FlipSpriteTowardsPlayer)}", 0.5f);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke();
     }
 
     void Update()
     {
+        Vector2 newPosition = transform.position;
         if (Vector2.Distance(transform.position, PlayerController.transform.position) <= 1)
         {
-            transform.position = Vector2.MoveTowards(transform.position, PlayerController.transform.position, Time.deltaTime * Speed);
+            newPosition = Vector2.MoveTowards(transform.position, PlayerController.transform.position, Time.deltaTime * Speed);
         }
         else
         {
             switch (typeOfMovement)
             {
                 case MovementType.Direct:
-                    transform.position = Vector2.MoveTowards(transform.position, (Vector2)PlayerController.transform.position + RandomSpotInUnitCircle, Time.deltaTime * Speed);
+                    newPosition = Vector2.MoveTowards(transform.position, (Vector2)PlayerController.transform.position + RandomSpotInUnitCircle, Time.deltaTime * Speed);
                     break;
 
                 case MovementType.Twitch:
-                    transform.position = Vector2.MoveTowards(transform.position, (Vector2)PlayerController.transform.position + RandomSpotInUnitCircle, Time.deltaTime * Speed)
+                    newPosition = Vector2.MoveTowards(transform.position, (Vector2)PlayerController.transform.position + RandomSpotInUnitCircle, Time.deltaTime * Speed)
                         + new Vector2(Random.Range(-0.01f, 0.01f), Random.Range(-0.01f, 0.01f));
                     break;
             }
         }
+
+        transform.position = newPosition;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

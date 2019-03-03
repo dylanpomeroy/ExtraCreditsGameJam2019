@@ -8,6 +8,7 @@ public class WeaponsShopController : MonoBehaviour
     public MoneyController MoneyController;
     public AmmoController AmmoController;
     public BulletInstantiator BulletInstantiator;
+    public GunSpriteController GunSpriteController;
 
     public int PistolPurchasePrice;
     public int ShotgunPurchasePrice;
@@ -30,6 +31,7 @@ public class WeaponsShopController : MonoBehaviour
         MoneyController.SubtractMoney(PistolPurchasePrice);
         PistolPurchased = true;
         BulletInstantiator.GunSelected = GunType.Pistol;
+        GunSpriteController.EquipPistol();
     }
 
     public void PurchaseShotgun()
@@ -42,6 +44,7 @@ public class WeaponsShopController : MonoBehaviour
         MoneyController.SubtractMoney(ShotgunPurchasePrice);
         ShotgunPurchased = true;
         BulletInstantiator.GunSelected = GunType.Shotgun;
+        GunSpriteController.EquipShotgun();
     }
 
     public void PurchaseMachinegun()
@@ -54,6 +57,7 @@ public class WeaponsShopController : MonoBehaviour
         MoneyController.SubtractMoney(MachineGunPurchasePrice);
         MachinegunPurchased = true;
         BulletInstantiator.GunSelected = GunType.MachineGun;
+        GunSpriteController.EquipMachinegun();
     }
 
     public void PurchaseAmmo()
