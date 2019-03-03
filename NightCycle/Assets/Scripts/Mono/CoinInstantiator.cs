@@ -19,7 +19,7 @@ public class CoinInstantiator : MonoBehaviour
         }
         set
         {
-            //Debug.Log($"{nameof(ActuallyActiveCoinCount)} being set to: {value}");
+            Debug.Log($"{nameof(ActuallyActiveCoinCount)} being set to: {value}");
             actuallyActiveCoinCount = value;
         }
     }

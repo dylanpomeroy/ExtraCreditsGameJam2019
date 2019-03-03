@@ -8,6 +8,6 @@ public class PlayerCollisionController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerController.OnTriggerEnter2D(collision);
+        PlayerController.HandleCollision(collision);
     }
 }

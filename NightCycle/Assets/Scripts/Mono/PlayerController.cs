@@ -46,15 +46,30 @@ public class PlayerController : MonoBehaviour
         GetComponent<CharacterController>().Move(moveVector);
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    private void LateUpdate()
     {
+        objectIdsAlreadyHit.Clear();
+    }
+
+    private List<int> objectIdsAlreadyHit = new List<int>();
+    public void HandleCollision(Collider2D collision)
+    {
+        Debug.Log($"Hit {collision.gameObject.GetInstanceID()}");
+
+        if (objectIdsAlreadyHit.Contains(collision.gameObject.GetInstanceID()))
+            return;
+
+        objectIdsAlreadyHit.Add(collision.gameObject.GetInstanceID());
+
         if (collision.gameObject.CompareTag("Coin"))
         {
+            Debug.Log("Hit coin");
             MoneyController.AddMoney(collision.gameObject.GetComponent<CoinController>().Value);
             CoinInstantiator.DestroyCoin(collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log("Hit enemy");
             GetComponent<CharacterController>().Move((transform.position - collision.transform.position).normalized * Time.deltaTime * 10);
             TakeDamage(10);
         }
