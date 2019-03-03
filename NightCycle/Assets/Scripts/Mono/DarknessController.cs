@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,8 @@ public class DarknessController : MonoBehaviour
 
     public bool IsDark;
     public bool IsLight;
+
+    public List<TextMeshProUGUI> Texts;
 
     private List<SpriteRenderer> groundRenders;
     
@@ -28,6 +31,8 @@ public class DarknessController : MonoBehaviour
 
     void Start()
     {
+        Texts.ForEach(text => text.faceColor = Color.black);
+
         groundRenders = GetComponentsInChildren<SpriteRenderer>().Where(render => render.name.Contains("Dirt")).ToList();
     }
 
@@ -44,12 +49,14 @@ public class DarknessController : MonoBehaviour
             var tempColor = darkness.color;
             tempColor.a = darkAlpha;
             darkness.color = Color32.Lerp(darkness.color, tempColor, Time.deltaTime);
+            Texts.ForEach(text => text.faceColor = Color32.Lerp(text.faceColor, Color.white, Time.deltaTime * 5));
         }
         else if (!shouldBeDark && darkness.color.a < lightAlpha)
         {
             var tempColor = darkness.color;
             tempColor.a = lightAlpha;
             darkness.color = Color32.Lerp(darkness.color, tempColor, Time.deltaTime);
+            Texts.ForEach(text => text.faceColor = Color32.Lerp(text.faceColor, Color.black, Time.deltaTime * 5));
         }
 
         IsDark = darkness.color.a < darkAlpha + 0.3f;

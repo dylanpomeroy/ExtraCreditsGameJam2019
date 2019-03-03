@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +34,6 @@ public class MoneyController : MonoBehaviour
 
     private void UpdateMoneyBalanceText()
     {
-        GetComponent<Text>().text = $"Money: ${MoneyBalance}";
+        GetComponent<TextMeshProUGUI>().text = $"Money: ${MoneyBalance}";
     }
 }

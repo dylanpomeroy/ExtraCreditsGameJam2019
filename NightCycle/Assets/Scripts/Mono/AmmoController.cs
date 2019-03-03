@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,6 +29,6 @@ public class AmmoController : MonoBehaviour
 
     private void UpdateAmmoBalanceText()
     {
-        GetComponent<Text>().text = $"Ammo: x{AmmoBalance}";
+        GetComponent<TextMeshProUGUI>().text = $"Ammo: x{AmmoBalance}";
     }
 }

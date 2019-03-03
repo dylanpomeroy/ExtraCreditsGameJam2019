@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,9 +12,9 @@ public class StageController : MonoBehaviour
     public EnemyInstantiator EnemyInstantiator;
     public DarknessController DarknessController;
     public PlayerController PlayerController;
-    public Text StageText;
-    public Text GoalText;
-    public Text HintText;
+    public TextMeshProUGUI StageText;
+    public TextMeshProUGUI GoalText;
+    public TextMeshProUGUI HintText;
     public GameObject MarketMenu;
 
     private List<Stage> stages;
@@ -45,7 +46,8 @@ public class StageController : MonoBehaviour
                     stepAction: () =>
                     {
                         SetTexts($"{stageId}",
-                            "Shoot all the enemies before they get to you!");
+                            "Shoot all the enemies before they get to you!",
+                            string.Empty);
 
                         EnemyInstantiator.SpawnEnemies(enemiesToSpawn);
                     },
