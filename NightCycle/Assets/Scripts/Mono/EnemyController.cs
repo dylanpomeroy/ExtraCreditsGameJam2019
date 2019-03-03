@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ExtensionMethods;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,9 @@ public class EnemyController : MonoBehaviour
 
     public CoinInstantiator CoinInstantiator; 
     public PlayerController PlayerController;
+
+    public AudioSource SoundPlayer;
+    public List<AudioClip> DeathSounds;
 
     private Vector2 RandomSpotInUnitCircle;
 
@@ -94,10 +98,12 @@ public class EnemyController : MonoBehaviour
 
     private void HandleDeath()
     {
+        SoundPlayer.PlayOneShot(DeathSounds.GetRandom());
         CoinInstantiator.InstantiateCoin(transform.position);
 
         EnemyInstantiator.DestroyEnemy(this.gameObject);
 
         disableCollisionDetection = true;
+
     }
 }

@@ -146,7 +146,7 @@ public class BulletInstantiator : MonoBehaviour
         ActiveBullets.Enqueue(newBullet);
         AmmoController.SutractAmmo(1);
 
-        GetComponent<AudioSource>().PlayOneShot(PistolShoot);
+        GetComponent<AudioSource>().PlayOneShot(PistolShoot, 0.3f);
     }
 
     private void ShootShotgun()
@@ -184,7 +184,7 @@ public class BulletInstantiator : MonoBehaviour
 
             ActiveBullets.Enqueue(newBullet);
 
-            GetComponent<AudioSource>().PlayOneShot(ShotgunShoot);
+            GetComponent<AudioSource>().PlayOneShot(ShotgunShoot, 0.3f);
         }
 
         AmmoController.SutractAmmo(bulletsInShot);
@@ -217,6 +217,6 @@ public class BulletInstantiator : MonoBehaviour
         ActiveBullets.Enqueue(newBullet);
         AmmoController.SutractAmmo(1);
 
-        GetComponent<AudioSource>().PlayOneShot(PistolShoot);
+        GetComponent<AudioSource>().PlayOneShot(PistolShoot, 0.3f);
     }
 }

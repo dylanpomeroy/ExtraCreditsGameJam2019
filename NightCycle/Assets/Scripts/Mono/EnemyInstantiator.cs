@@ -11,6 +11,7 @@ public class EnemyInstantiator : MonoBehaviour
     public Transform EnemyParent;
     public PlayerController PlayerController;
     public CoinInstantiator CoinInstantiator;
+    public AudioSource SoundPlayer;
 
     public GameObject InstantiationPointsParent;
     private List<Transform> InstantiationPoints;
@@ -86,6 +87,7 @@ public class EnemyInstantiator : MonoBehaviour
             var enemyScript = newEnemy.GetComponent<EnemyController>();
             enemyScript.Health = 2;
             enemyScript.typeOfMovement = (MovementType)Random.Range(0, 2);
+            enemyScript.SoundPlayer = SoundPlayer;
 
             ActiveEnemies.Enqueue(newEnemy);
         }

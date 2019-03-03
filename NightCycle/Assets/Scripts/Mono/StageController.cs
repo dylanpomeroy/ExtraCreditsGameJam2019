@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts;
+using ExtensionMethods;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,15 @@ public class StageController : MonoBehaviour
     private List<Stage> stages;
     private int currentStageIndex;
 
+    public AudioSource SoundPlayer;
+    public List<AudioClip> StageStartSounds;
+
     private void Start()
     {
         stages = new List<Stage>();
+
+        CoinInstantiator.ActuallyActiveCoinCount = 0;
+
         SetInitialStages();
 
         for (var i = 2; i <= 10; i++)
@@ -48,6 +55,8 @@ public class StageController : MonoBehaviour
                         SetTexts($"{stageId}",
                             "Shoot all the enemies before they get to you!",
                             string.Empty);
+
+                        SoundPlayer.PlayOneShot(StageStartSounds.GetRandom(), 2f);
 
                         EnemyInstantiator.SpawnEnemies(enemiesToSpawn);
                     },
@@ -123,6 +132,8 @@ public class StageController : MonoBehaviour
                         SetTexts("1",
                             "Shoot all the enemies before they get to you!",
                             "You can aim with the mouse and shoot with left click");
+
+                        SoundPlayer.PlayOneShot(StageStartSounds.GetRandom(), 2f);
 
                         EnemyInstantiator.SpawnEnemies(10);
                     },
