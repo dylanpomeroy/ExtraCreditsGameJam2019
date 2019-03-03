@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public MoneyController MoneyController;
     public HealthBar HealthBar;
+    public GameObject GameOverText;
 
     public float speed;
     public bool DisableMovement;
@@ -17,7 +18,8 @@ public class PlayerController : MonoBehaviour
         CurrentHealth -= damage;
         if (CurrentHealth <= 0)
         {
-            Time.timeScale = 0;
+            Time.timeScale = 0.1f;
+            GameOverText.SetActive(true);
         }
     }
 
