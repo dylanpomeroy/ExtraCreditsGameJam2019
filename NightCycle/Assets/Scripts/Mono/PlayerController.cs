@@ -19,15 +19,17 @@ public class PlayerController : MonoBehaviour
 
     public int CurrentHealth = 100;
 
+    bool alreadyDied = false;
     public void TakeDamage(int damage)
     {
         CurrentHealth -= damage;
-        if (CurrentHealth <= 0)
+        if (CurrentHealth <= 0 && !alreadyDied)
         {
             SoundPlayer.PlayOneShot(GameOverSound, 5f);
             Time.timeScale = 0.1f;
             GameOverText.SetActive(true);
             Invoke("ShowRestartButton", 0.5f);
+            alreadyDied = true;
         }
         else
         {
