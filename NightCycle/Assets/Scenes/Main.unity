@@ -3071,7 +3071,7 @@ GameObject:
   - component: {fileID: 278388113}
   - component: {fileID: 278388112}
   m_Layer: 0
-  m_Name: CoinInstantiator
+  m_Name: CoinsInstantiator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3701,6 +3701,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   DisableMovement: 0
+  Health: 100
 --- !u!4 &336141219
 Transform:
   m_ObjectHideFlags: 0
@@ -16551,6 +16552,7 @@ MonoBehaviour:
   CoinInstantiator: {fileID: 278388112}
   EnemyInstantiator: {fileID: 1527484988}
   DarknessController: {fileID: 504889232}
+  StageText: {fileID: 270702799}
   GoalText: {fileID: 1766041450}
   HintText: {fileID: 1138427832}
   MarketMenu: {fileID: 664628241}
@@ -22379,7 +22381,7 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 4051156302077097220, guid: 2e07bc864df812844a17ad183c30e8d5,
     type: 3}
   EnemyParent: {fileID: 257773548}
-  Player: {fileID: 336141217}
+  PlayerController: {fileID: 336141218}
   CoinInstantiator: {fileID: 278388112}
   InstantiationPointsParent: {fileID: 648421224}
   EnemyPoolSize: 150

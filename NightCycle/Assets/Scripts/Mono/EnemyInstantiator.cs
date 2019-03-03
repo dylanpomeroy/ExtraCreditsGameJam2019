@@ -8,7 +8,7 @@ public class EnemyInstantiator : MonoBehaviour
 {
     public GameObject EnemyPrefab;
     public Transform EnemyParent;
-    public GameObject Player;
+    public PlayerController PlayerController;
     public CoinInstantiator CoinInstantiator;
 
     public GameObject InstantiationPointsParent;
@@ -40,9 +40,10 @@ public class EnemyInstantiator : MonoBehaviour
             var newEnemy = Instantiate(EnemyPrefab, EnemyParent);
 
             var enemyScript = newEnemy.GetComponent<EnemyController>();
-            enemyScript.Player = Player;
+            enemyScript.PlayerController = PlayerController;
             enemyScript.CoinInstantiator = CoinInstantiator;
-            
+            enemyScript.health = 3;
+
             newEnemy.SetActive(false);
             EnemyPool.Enqueue(newEnemy);
         }

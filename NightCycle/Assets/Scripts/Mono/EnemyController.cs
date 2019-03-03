@@ -8,13 +8,13 @@ public class EnemyController : MonoBehaviour
     public int health;
 
     public CoinInstantiator CoinInstantiator; 
-    public GameObject Player;
+    public PlayerController PlayerController;
 
     private bool disableCollisionDetection;
 
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, Time.deltaTime * Speed);
+        transform.position = Vector2.MoveTowards(transform.position, PlayerController.transform.position, Time.deltaTime * Speed);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -23,13 +23,17 @@ public class EnemyController : MonoBehaviour
         {
             HandleBulletCollision(other);
         }
+        else if (other.gameObject.CompareTag("Player"))
+        {
+            PlayerController.TakeDamage(10);
+        }
     }
 
     private void HandleBulletCollision(Collider2D bulletCollider)
     {
         if (disableCollisionDetection) return;
 
-        transform.position += (transform.position - Player.transform.position).normalized * 10 * Time.deltaTime;
+        transform.position += (transform.position - PlayerController.transform.position).normalized * 10 * Time.deltaTime;
 
         BulletInstantiator.DestroyBullet(bulletCollider.gameObject);
 

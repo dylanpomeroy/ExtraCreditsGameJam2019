@@ -7,6 +7,18 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public bool DisableMovement;
 
+    public int Health = 100;
+
+    public void TakeDamage(int damage)
+    {
+        Health -= damage;
+        if (Health <= 0)
+        {
+            Debug.Log("You died.");
+            Time.timeScale = 0;
+        }
+    }
+
     void Start()
     {
         if (speed == 0f) speed = 1;
