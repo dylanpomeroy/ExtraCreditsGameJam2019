@@ -29,7 +29,7 @@ public class StageController : MonoBehaviour
         {
             SetRecurringStages(
                 stageId: i,
-                enemiesToSpawn: (i - 1) * 10);
+                enemiesToSpawn: i * 10);
         }
     }
 
