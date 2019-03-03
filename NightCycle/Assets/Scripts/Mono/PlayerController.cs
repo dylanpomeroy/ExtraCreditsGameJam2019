@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ExtensionMethods;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,10 @@ public class PlayerController : MonoBehaviour
     public HealthBar HealthBar;
     public GameObject GameOverText;
     public GameObject RestartButton;
+
+    public AudioSource SoundPlayer;
+    public List<AudioClip> HurtSounds;
+    public AudioClip GameOverSound;
 
     public float speed;
     public bool DisableMovement;
@@ -19,9 +24,14 @@ public class PlayerController : MonoBehaviour
         CurrentHealth -= damage;
         if (CurrentHealth <= 0)
         {
+            SoundPlayer.PlayOneShot(GameOverSound, 5f);
             Time.timeScale = 0.1f;
             GameOverText.SetActive(true);
             Invoke("ShowRestartButton", 0.5f);
+        }
+        else
+        {
+            SoundPlayer.PlayOneShot(HurtSounds.GetRandom());
         }
     }
 

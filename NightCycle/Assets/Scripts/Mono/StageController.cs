@@ -29,6 +29,7 @@ public class StageController : MonoBehaviour
         stages = new List<Stage>();
 
         CoinInstantiator.ActuallyActiveCoinCount = 0;
+        EnemyInstantiator.ActuallyActiveEnemyCount = 0;
 
         SetInitialStages();
 

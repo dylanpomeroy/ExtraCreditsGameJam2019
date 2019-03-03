@@ -21,6 +21,7 @@ public class BulletInstantiator : MonoBehaviour
 
     public enum GunType
     {
+        None,
         Pistol,
         Shotgun,
         MachineGun
@@ -29,6 +30,7 @@ public class BulletInstantiator : MonoBehaviour
     public GunType GunSelected;
     private Dictionary<GunType, float> secondsAllowedBetweenBullets = new Dictionary<GunType, float>
     {
+        { GunType.None, 0.0f },
         { GunType.Pistol, 0.3f },
         { GunType.Shotgun, 0.7f },
         { GunType.MachineGun, 0.1f },
@@ -36,6 +38,7 @@ public class BulletInstantiator : MonoBehaviour
 
     private Dictionary<GunType, float> timeUntilCanFire = new Dictionary<GunType, float>
     {
+        { GunType.None, 0.0f },
         { GunType.Pistol, 0.0f },
         { GunType.Shotgun, 0.0f },
         { GunType.MachineGun, 0.0f },

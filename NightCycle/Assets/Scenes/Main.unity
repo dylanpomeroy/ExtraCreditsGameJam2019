@@ -3803,6 +3803,11 @@ MonoBehaviour:
   HealthBar: {fileID: 1731243724}
   GameOverText: {fileID: 1377089820}
   RestartButton: {fileID: 2081474908}
+  SoundPlayer: {fileID: 1750612929}
+  HurtSounds:
+  - {fileID: 8300000, guid: 4243b0fb174fedd4f805681b236636f6, type: 3}
+  - {fileID: 8300000, guid: d5d706bd1af2b9b4aae6a40a0e98a54e, type: 3}
+  GameOverSound: {fileID: 8300000, guid: 63bf6f57d23387e41802c4c58d663bd0, type: 3}
   speed: 5
   DisableMovement: 0
   CurrentHealth: 100
@@ -11742,7 +11747,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &807157495
 Transform:
   m_ObjectHideFlags: 0
@@ -17810,7 +17815,7 @@ MonoBehaviour:
   StageStartSounds:
   - {fileID: 8300000, guid: ae7713c6f52288f4b8d4d3059a0f3fad, type: 3}
   - {fileID: 8300000, guid: 250a189fd6af2a74a85b5ef2a4d6c968, type: 3}
-  - {fileID: 8300000, guid: bed04517cd5c96e40b8756cf3a5ca580, type: 3}
+  - {fileID: 8300000, guid: c8f20beb9e82147409b949fd2765e661, type: 3}
   - {fileID: 8300000, guid: 6785a9930d8753443a236dd51ac9026e, type: 3}
 --- !u!4 &1133561162
 Transform:
