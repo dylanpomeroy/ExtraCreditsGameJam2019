@@ -10,6 +10,7 @@ public class StageController : MonoBehaviour
     public CoinInstantiator CoinInstantiator;
     public EnemyInstantiator EnemyInstantiator;
     public DarknessController DarknessController;
+    public PlayerController PlayerController;
     public Text StageText;
     public Text GoalText;
     public Text HintText;
@@ -58,7 +59,7 @@ public class StageController : MonoBehaviour
                         SetTexts(null,
                             "Finish collecting all the coints dropped by the enemies");
 
-                        HintText.text = string.Empty;
+                        PlayerController.CurrentHealth = 100;
                     },
                     checkCompleted: () => CoinInstantiator.ActuallyActiveCoinCount == 0),
                 new StageStep(
@@ -133,7 +134,7 @@ public class StageController : MonoBehaviour
                         SetTexts(null,
                             "Finish collecting all the coints dropped by the enemies");
 
-                        HintText.text = string.Empty;
+                        PlayerController.CurrentHealth = 100;
                     },
                     checkCompleted: () => CoinInstantiator.ActuallyActiveCoinCount == 0),
                 new StageStep(

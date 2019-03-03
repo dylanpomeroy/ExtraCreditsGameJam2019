@@ -26,7 +26,6 @@ public class EnemyController : MonoBehaviour
     {
         disableCollisionDetection = false;
 
-        Debug.Log("Setting destination near player.");
         RandomSpotInUnitCircle = Random.insideUnitCircle;
     }
 

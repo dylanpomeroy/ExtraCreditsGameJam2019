@@ -5,18 +5,18 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public MoneyController MoneyController;
+    public HealthBar HealthBar;
 
     public float speed;
     public bool DisableMovement;
 
-    public int Health = 100;
+    public int CurrentHealth = 100;
 
     public void TakeDamage(int damage)
     {
-        Health -= damage;
-        if (Health <= 0)
+        CurrentHealth -= damage;
+        if (CurrentHealth <= 0)
         {
-            Debug.Log("You died.");
             Time.timeScale = 0;
         }
     }
@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        HealthBar.UpdateHealth(CurrentHealth / 100f);
+
         if (DisableMovement)
             return;
 
