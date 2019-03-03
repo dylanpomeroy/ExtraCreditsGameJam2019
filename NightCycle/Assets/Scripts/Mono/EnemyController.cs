@@ -10,6 +10,8 @@ public class EnemyController : MonoBehaviour
     public CoinInstantiator CoinInstantiator; 
     public GameObject Player;
 
+    private bool disableCollisionDetection;
+
     void Update()
     {
         transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, Time.deltaTime * Speed);
@@ -25,6 +27,8 @@ public class EnemyController : MonoBehaviour
 
     private void HandleBulletCollision(Collider2D bulletCollider)
     {
+        if (disableCollisionDetection) return;
+
         transform.position += (transform.position - Player.transform.position).normalized * 10 * Time.deltaTime;
 
         BulletInstantiator.DestroyBullet(bulletCollider.gameObject);
@@ -39,5 +43,12 @@ public class EnemyController : MonoBehaviour
         CoinInstantiator.InstantiateCoin(transform.position);
 
         EnemyInstantiator.DestroyEnemy(this.gameObject);
+
+        disableCollisionDetection = true;
+    }
+
+    private void OnEnable()
+    {
+        disableCollisionDetection = false;
     }
 }

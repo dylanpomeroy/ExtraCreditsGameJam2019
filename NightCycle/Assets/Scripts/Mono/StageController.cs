@@ -10,6 +10,7 @@ public class StageController : MonoBehaviour
     public CoinInstantiator CoinInstantiator;
     public EnemyInstantiator EnemyInstantiator;
     public DarknessController DarknessController;
+    public Text StageText;
     public Text GoalText;
     public Text HintText;
     public GameObject MarketMenu;
@@ -19,16 +20,69 @@ public class StageController : MonoBehaviour
 
     private void Start()
     {
-        stages = new List<Stage>
+        stages = new List<Stage>();
+        SetInitialStages();
+
+        for (var i = 2; i <= 10; i++)
         {
-            new Stage(
+            SetRecurringStages(
+                stageId: i,
+                enemiesToSpawn: (i - 1) * 10);
+        }
+    }
+
+    private void SetRecurringStages(int stageId, int enemiesToSpawn)
+    {
+        stages.Add(new Stage(
+            stageId,
+            new List<StageStep>
+            {
+                new StageStep(
+                    stepAction: () => DarknessController.MakeDark(),
+                    checkCompleted: () => DarknessController.IsDark),
+                new StageStep(
+                    stepAction: () =>
+                    {
+                        SetTexts($"{stageId}",
+                            "Shoot all the enemies before they get to you!");
+
+                        EnemyInstantiator.SpawnEnemies(enemiesToSpawn);
+                    },
+                    checkCompleted: () => EnemyInstantiator.ActuallyActiveEnemyCount == 0),
+                new StageStep(
+                    stepAction: () => DarknessController.MakeLight(),
+                    checkCompleted: () => DarknessController.IsLight),
+                new StageStep(
+                    stepAction: () =>
+                    {
+                        SetTexts(null,
+                            "Finish collecting all the coints dropped by the enemies");
+
+                        HintText.text = string.Empty;
+                    },
+                    checkCompleted: () => CoinInstantiator.ActuallyActiveCoinCount == 0),
+                new StageStep(
+                    stepAction: () =>
+                    {
+                        SetTexts(null,
+                            "Prepare yourself for the text attack!");
+
+                        MarketMenu.SetActive(true);
+                    },
+                    checkCompleted: () => !MarketMenu.activeSelf),
+            }));
+    }
+
+    private void SetInitialStages()
+    {
+        stages.Add(new Stage(
             0,
             new List<StageStep>
             {
                 new StageStep(
                     stepAction: () =>
                     {
-                        SetTexts(
+                        SetTexts("0",
                             "Pick up all the coins off the ground",
                             "You can move with the WASD keys");
 
@@ -44,15 +98,16 @@ public class StageController : MonoBehaviour
                 new StageStep(
                     stepAction: () =>
                     {
-                        SetTexts(
+                        SetTexts(null,
                             "Purchase a handgun and x900 ammo",
                             "Click the Purchase buttons and then Done when you're finished");
 
                         MarketMenu.SetActive(true);
                     },
                     checkCompleted: () => !MarketMenu.activeSelf),
-            }),
-            new Stage(
+            }));
+
+        stages.Add(new Stage(
             1,
             new List<StageStep>
             {
@@ -62,9 +117,9 @@ public class StageController : MonoBehaviour
                 new StageStep(
                     stepAction: () =>
                     {
-                        SetTexts(
+                        SetTexts("1",
                             "Shoot all the enemies before they get to you!",
-                            "You can aim with the moue and shoot with left click");
+                            "You can aim with the mouse and shoot with left click");
 
                         EnemyInstantiator.SpawnEnemies(10);
                     },
@@ -75,7 +130,7 @@ public class StageController : MonoBehaviour
                 new StageStep(
                     stepAction: () =>
                     {
-                        SetTexts(
+                        SetTexts(null,
                             "Finish collecting all the coints dropped by the enemies");
 
                         HintText.text = string.Empty;
@@ -84,19 +139,23 @@ public class StageController : MonoBehaviour
                 new StageStep(
                     stepAction: () =>
                     {
-                        SetTexts(
+                        SetTexts(null,
                             "Prepare yourself for the text attack!",
                             "Once you earn enough money you can purchase better weapons");
 
                         MarketMenu.SetActive(true);
                     },
                     checkCompleted: () => !MarketMenu.activeSelf),
-            })
-        };
+            }));
     }
 
-    private void SetTexts(string goalText = null, string hintText = null)
+    private void SetTexts(string stageText = null, string goalText = null, string hintText = null)
     {
+        if (stageText != null)
+        {
+            StageText.text = $"Stage: {stageText}";
+        }
+        
         if (goalText != null)
         {
             GoalText.text = $"Goal: {goalText}";
