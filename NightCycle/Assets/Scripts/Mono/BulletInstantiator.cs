@@ -135,6 +135,11 @@ public class BulletInstantiator : MonoBehaviour
         if (BulletPool.Count == 0)
         {
             newBullet = ActiveBullets.Dequeue();
+
+            // inactive bullets are ones we put back in the bullet pool
+            // these are leftover entries we should ignore
+            while (!newBullet.activeSelf)
+                newBullet = ActiveBullets.Dequeue();
         }
         else
         {
@@ -205,6 +210,11 @@ public class BulletInstantiator : MonoBehaviour
         if (BulletPool.Count == 0)
         {
             newBullet = ActiveBullets.Dequeue();
+
+            // inactive bullets are ones we put back in the bullet pool
+            // these are leftover entries we should ignore
+            while (!newBullet.activeSelf)
+                newBullet = ActiveBullets.Dequeue();
         }
         else
         {

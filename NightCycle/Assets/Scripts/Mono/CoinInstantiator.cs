@@ -8,6 +8,8 @@ public class CoinInstantiator : MonoBehaviour
     public GameObject CoinPrefab;
     public Transform CoinParent;
     public int CoinPoolSize;
+    public PlayerController PlayerController;
+    public EnemyInstantiator EnemyInstantiator;
 
     public static Queue<GameObject> CoinPool;
     public static Queue<GameObject> ActiveCoins;
@@ -34,7 +36,7 @@ public class CoinInstantiator : MonoBehaviour
         ActuallyActiveCoinCount--;
     }
 
-    public void InstantiateCoin(Vector2 position)
+    public void InstantiateCoin(Vector2 position, bool moveTowardsPlayerWhenStageEnds)
     {
         GameObject newCoin;
         if (CoinPool.Count == 0)
@@ -55,6 +57,11 @@ public class CoinInstantiator : MonoBehaviour
         newCoin.SetActive(true);
         newCoin.transform.position = position;
         newCoin.transform.position = new Vector3(newCoin.transform.position.x, newCoin.transform.position.y, 7);
+
+        var coinScript = newCoin.GetComponent<CoinController>();
+        coinScript.PlayerController = PlayerController;
+        coinScript.EnemyInstantiator = EnemyInstantiator;
+        coinScript.MoveToPlayerWhenStageEnds = moveTowardsPlayerWhenStageEnds;
 
         ActiveCoins.Enqueue(newCoin);
     }

@@ -58,7 +58,7 @@ public class EnemyInstantiator : MonoBehaviour
         }   
     }
 
-    public void SpawnEnemies(int count)
+    public void SpawnEnemies(int count, Vector2? overrideInstantiationPoints = null)
     {
         for (var i = 0; i < count; i++)
         {
@@ -79,17 +79,94 @@ public class EnemyInstantiator : MonoBehaviour
             }
 
             newEnemy.SetActive(true);
-            newEnemy.transform.position = InstantiationPoints.GetRandom().position;
-            newEnemy.transform.position = (Vector2)newEnemy.transform.position + new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
 
+            if (overrideInstantiationPoints == null)
+            {
+                newEnemy.transform.position = InstantiationPoints.GetRandom().position;
+            }
+            else
+            {
+                var cornerPoints = new List<Vector2>
+                {
+                    overrideInstantiationPoints.Value + new Vector2(-1, -1),
+                    overrideInstantiationPoints.Value + new Vector2(-1, 1),
+                    overrideInstantiationPoints.Value + new Vector2(1, -1),
+                    overrideInstantiationPoints.Value + new Vector2(1, 1),
+                };
+
+                newEnemy.transform.position = cornerPoints.GetRandom();
+            }
+
+            newEnemy.transform.position = (Vector2)newEnemy.transform.position + new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
             newEnemy.transform.position = new Vector3(newEnemy.transform.position.x, newEnemy.transform.position.y, 7);
 
             var enemyScript = newEnemy.GetComponent<EnemyController>();
             enemyScript.Health = 2;
             enemyScript.typeOfMovement = (MovementType)Random.Range(0, 2);
             enemyScript.SoundPlayer = SoundPlayer;
+            enemyScript.PlayerController = PlayerController;
+
+            var maxEnemyType = count / 10 - 1;
+            var enemyType = Random.Range(0, maxEnemyType);
+
+            if (enemyType == 0) // normal
+            {
+                newEnemy.transform.localScale = new Vector2(4, 4);
+                enemyScript.Health = 2;
+            }
+            if (enemyType == 1) // strong
+            {
+                newEnemy.transform.localScale = new Vector2(5, 4);
+                enemyScript.Speed = 1;
+                enemyScript.Health = 5;
+            }
+            else if (enemyType == 2) // fast
+            {
+                newEnemy.transform.localScale = new Vector2(3, 3);
+                enemyScript.Speed = 3;
+                enemyScript.Health = 2;
+            }
 
             ActiveEnemies.Enqueue(newEnemy);
         }
+    }
+
+    public void SpawnBoss()
+    {
+        GameObject newEnemy;
+        if (EnemyPool.Count == 0)
+        {
+            newEnemy = ActiveEnemies.Dequeue();
+
+            // inactive enemies are ones we put back in the enemy pool
+            // these are leftover entries we should ignore
+            while (!newEnemy.activeSelf)
+                newEnemy = ActiveEnemies.Dequeue();
+        }
+        else
+        {
+            newEnemy = EnemyPool.Dequeue();
+            ActuallyActiveEnemyCount++;
+        }
+
+        newEnemy.SetActive(true);
+        newEnemy.transform.position = InstantiationPoints.GetRandom().position;
+        newEnemy.transform.position = (Vector2)newEnemy.transform.position + new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
+
+        newEnemy.transform.position = new Vector3(newEnemy.transform.position.x, newEnemy.transform.position.y, 7);
+
+        var enemyScript = newEnemy.GetComponent<EnemyController>();
+        enemyScript.Health = 2;
+        enemyScript.typeOfMovement = (MovementType)Random.Range(0, 2);
+        enemyScript.SoundPlayer = SoundPlayer;
+        enemyScript.EnemyInstantiator = this;
+        enemyScript.PlayerController = PlayerController;
+        enemyScript.isBoss = true;
+
+        newEnemy.transform.localScale = new Vector2(20, 20);
+        enemyScript.Health = 100;
+        enemyScript.Speed = 0.5f;
+        
+        ActiveEnemies.Enqueue(newEnemy);
     }
 }

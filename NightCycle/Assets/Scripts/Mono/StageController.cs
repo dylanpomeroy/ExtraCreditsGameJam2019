@@ -34,7 +34,7 @@ public class StageController : MonoBehaviour
 
         SetInitialStages();
 
-        for (var i = 2; i <= 10; i++)
+        for (var i = 2; i <= 100; i++)
         {
             SetRecurringStages(
                 stageId: i,
@@ -60,7 +60,16 @@ public class StageController : MonoBehaviour
 
                         SoundPlayer.PlayOneShot(StageStartSounds.GetRandom(), 2f);
 
-                        EnemyInstantiator.SpawnEnemies(enemiesToSpawn);
+                        if (stageId != 5)
+                        {
+                            EnemyInstantiator.SpawnEnemies(enemiesToSpawn);
+                        }
+                        else
+                        {
+                            EnemyInstantiator.SpawnBoss();
+                            SetTexts(null,
+                                "Seems like you've found a boss. Be careful!");
+                        }
                     },
                     checkCompleted: () => EnemyInstantiator.ActuallyActiveEnemyCount == 0),
                 new StageStep(
@@ -105,7 +114,7 @@ public class StageController : MonoBehaviour
                             var randomVector = new Vector2(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
                             var coinPosition = (Vector2)transform.position + randomVector;
 
-                            CoinInstantiator.InstantiateCoin(coinPosition);
+                            CoinInstantiator.InstantiateCoin(coinPosition, false);
                         }
                     },
                     checkCompleted: () => CoinInstantiator.ActuallyActiveCoinCount == 0),
@@ -113,7 +122,7 @@ public class StageController : MonoBehaviour
                     stepAction: () =>
                     {
                         SetTexts(null,
-                            "Purchase a handgun and x900 ammo",
+                            "Purchase a handgun and x180 ammo",
                             "Click the Purchase buttons and then Done when you're finished");
 
                         MarketMenu.SetActive(true);

@@ -10,11 +10,14 @@ public class EnemyController : MonoBehaviour
 
     public CoinInstantiator CoinInstantiator; 
     public PlayerController PlayerController;
+    public EnemyInstantiator EnemyInstantiator;
 
     public AudioSource SoundPlayer;
     public List<AudioClip> DeathSounds;
 
     private Vector2 RandomSpotInUnitCircle;
+
+    public bool isBoss;
 
     public MovementType typeOfMovement;
 
@@ -30,7 +33,7 @@ public class EnemyController : MonoBehaviour
     {
         disableCollisionDetection = false;
 
-        RandomSpotInUnitCircle = Random.insideUnitCircle;
+        RandomSpotInUnitCircle = Random.insideUnitCircle * 2;
 
         Invoke($"{nameof(FlipSpriteTowardsPlayer)}", 0.5f);
     }
@@ -43,17 +46,26 @@ public class EnemyController : MonoBehaviour
         GetComponent<SpriteRenderer>().flipX = currentPosition.x > playerPosition.x;
 
         Invoke($"{nameof(FlipSpriteTowardsPlayer)}", 0.5f);
+
+        if (isBoss)
+            InvokeRepeating($"{nameof(SpawnEnemiesAroundBoss)}", 5f, 5f);
+    }
+
+    private void SpawnEnemiesAroundBoss()
+    {
+        EnemyInstantiator.SpawnEnemies(1, overrideInstantiationPoints: transform.position);
     }
 
     private void OnDisable()
     {
         CancelInvoke();
+        isBoss = false;
     }
 
     void Update()
     {
         Vector2 newPosition = transform.position;
-        if (Vector2.Distance(transform.position, PlayerController.transform.position) <= 1)
+        if (Vector2.Distance(transform.position, PlayerController.transform.position) <= 2)
         {
             newPosition = Vector2.MoveTowards(transform.position, PlayerController.transform.position, Time.deltaTime * Speed);
         }
@@ -89,7 +101,8 @@ public class EnemyController : MonoBehaviour
     {
         if (disableCollisionDetection) return;
 
-        transform.position += (transform.position - PlayerController.transform.position).normalized * 10 * Time.deltaTime;
+        if (!isBoss)
+            transform.position += (transform.position - PlayerController.transform.position).normalized * 10 * Time.deltaTime;
 
         BulletInstantiator.DestroyBullet(bulletCollider.gameObject);
 
@@ -101,11 +114,10 @@ public class EnemyController : MonoBehaviour
     private void HandleDeath()
     {
         SoundPlayer.PlayOneShot(DeathSounds.GetRandom());
-        CoinInstantiator.InstantiateCoin(transform.position);
+        CoinInstantiator.InstantiateCoin(transform.position, true);
 
         EnemyInstantiator.DestroyEnemy(this.gameObject);
 
         disableCollisionDetection = true;
-
     }
 }
