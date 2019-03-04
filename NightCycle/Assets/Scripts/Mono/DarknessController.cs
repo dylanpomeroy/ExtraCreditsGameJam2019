@@ -39,10 +39,10 @@ public class DarknessController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N))
-            shouldBeDark = true;
-        if (Input.GetKeyDown(KeyCode.M))
-            shouldBeDark = false;
+        //if (Input.GetKeyDown(KeyCode.N))
+        //    shouldBeDark = true;
+        //if (Input.GetKeyDown(KeyCode.M))
+        //    shouldBeDark = false;
 
         var darkness = groundRenders[1];
         if (shouldBeDark && darkness.color.a > darkAlpha)

@@ -10,7 +10,7 @@ public class Canvas : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            MarketMenu.SetActive(true);
+            //MarketMenu.SetActive(true);
         }
     }
 }

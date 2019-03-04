@@ -28,7 +28,7 @@ public class MoneyController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            this.AddMoney(100);
+            //this.AddMoney(100);
         }
     }
 

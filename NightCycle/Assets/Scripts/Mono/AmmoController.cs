@@ -23,7 +23,7 @@ public class AmmoController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.U))
         {
-            this.AddAmmo(25);
+            //this.AddAmmo(25);
         }
     }
 
