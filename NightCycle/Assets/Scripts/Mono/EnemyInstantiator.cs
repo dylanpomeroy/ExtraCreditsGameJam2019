@@ -54,7 +54,7 @@ public class EnemyInstantiator : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            SpawnEnemies(50);
+            //SpawnEnemies(50);
         }   
     }
 
@@ -112,6 +112,7 @@ public class EnemyInstantiator : MonoBehaviour
             if (enemyType == 0) // normal
             {
                 newEnemy.transform.localScale = new Vector2(4, 4);
+                enemyScript.Speed = 1;
                 enemyScript.Health = 2;
             }
             if (enemyType == 1) // strong
@@ -123,7 +124,7 @@ public class EnemyInstantiator : MonoBehaviour
             else if (enemyType == 2) // fast
             {
                 newEnemy.transform.localScale = new Vector2(3, 3);
-                enemyScript.Speed = 3;
+                enemyScript.Speed = 2;
                 enemyScript.Health = 2;
             }
 
